@@ -1,0 +1,43 @@
+﻿@model BibliotecaVirtual.Models.Usuario
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h4>Editar Usuario: @Model.Nombre</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="EditUser" method="post">
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Password" />
+
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Rol" class="control-label"></label>
+                <select asp-for="Rol" class="form-control">
+                    <option value="Aprendiz">Aprendiz</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <span asp-validation-for="Rol" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
+                <a asp-action="Dashboard" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

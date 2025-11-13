@@ -1,0 +1,60 @@
+﻿@model Libro
+@{
+    ViewData["Title"] = Model.Titulo;
+}
+
+<div class="book-details-container">
+    <div class="book-details-cover">
+        <img src="@Model.UrlPortada" alt="Portada de @Model.Titulo" />
+    </div>
+    <div class="book-details-info">
+        <a href="@Model.UrlArchivo" class="btn btn-success" target="_blank">Leer Libro</a>
+
+        <form asp-controller="Favorites" asp-action="Add" method="post" style="display: inline;">
+            <input type="hidden" name="libroId" value="@Model.Id" />
+            <button type="submit" class="btn btn-warning">⭐ Agregar a Favoritos</button>
+        </form>
+
+        <form asp-controller="Favorites" asp-action="Remove" method="post" style="display: inline;">
+            <input type="hidden" name="libroId" value="@Model.Id" />
+            <button type="submit" class="btn btn-danger">🗑️ Quitar de Favoritos</button>
+        </form>
+
+        <a asp-controller="Book" asp-action="Catalog" class="btn btn-secondary">Volver al Catálogo</a>
+        <h1>@Model.Titulo</h1>
+        <h3>por @Model.Autor</h3>
+        <p><strong>Categoría:</strong> <span class="badge">@Model.Categoria</span></p>
+        <hr />
+        <h4>Descripción</h4>
+        <p>@Model.Descripcion</p>
+        <br />
+    </div>
+</div>
+
+<style>
+    .book-details-container {
+        display: flex;
+        gap: 2rem;
+        background-color: white;
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+    }
+
+    .book-details-cover img {
+        max-width: 300px;
+        border-radius: var(--border-radius);
+    }
+
+    .book-details-info h1 {
+        margin-top: 0;
+    }
+
+    .badge {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 5px;
+        font-size: 0.9rem;
+    }
+</style>

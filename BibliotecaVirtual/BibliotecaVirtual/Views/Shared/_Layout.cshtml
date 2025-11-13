@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Biblioteca Virtual</title>
+
+    <link rel="stylesheet" href="~/css/stilos.css" />
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <span>Biblioteca Virtual</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
+                    <li><a class="nav-link" asp-area="" asp-controller="Book" asp-action="Catalog">Catálogo</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a class="nav-link" asp-controller="Favorites" asp-action="Index">Favoritos</a></li>
+                        @if (ViewData["IsAdminDashboard"] as bool? != true)
+                        {
+                            <li><a class="nav-link" asp-controller="Admin" asp-action="Dashboard">Gestionar Libros</a></li>
+                        }
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Dashboard">Admin</a></li>
+                    }
+                </ul>
+            </nav>
+            <div class="user-actions">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span class="nav-text" style="margin-right: 1rem;">
+                        Hola, @User.FindFirst(System.Security.Claims.ClaimTypes.Name).Value
+                    </span>
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit" class="btn btn-secondary">Cerrar Sesión</button>
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Iniciar Sesión</a>
+                }
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 - Biblioteca Virtual - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

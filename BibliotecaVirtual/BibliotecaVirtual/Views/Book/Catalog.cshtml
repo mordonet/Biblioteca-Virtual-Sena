@@ -1,0 +1,79 @@
+﻿@model List<Libro>
+@{
+    ViewData["Title"] = "Catálogo de Libros";
+}
+
+<div class="catalog-header">
+    <h2>Catálogo de Libros</h2>
+</div>
+
+<form asp-controller="Book" asp-action="Catalog" method="get">
+    <div class="search-box" style="margin-bottom: 10px;">
+        <input type="text" name="searchString" placeholder="Buscar por título..." value="@ViewData["CurrentFilter"]" />
+        <button type="submit" class="btn btn-primary">🔍</button>
+    </div>
+
+    <div class="filters">
+        <label style="margin-right: 10px;">Categoría:</label>
+        <select name="bookCategory" asp-items="ViewBag.BookCategory" class="filter-select">
+            <option value="">Todas</option>
+        </select>
+        <input type="submit" value="Aplicar Filtros" class="btn btn-secondary btn-sm" />
+    </div>
+</form>
+
+<hr />
+
+<div class="filters">
+</div>
+
+<div class="books-grid" id="books-container">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var libro in Model)
+        {
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="@libro.UrlPortada" alt="Portada de @libro.Titulo">
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">@libro.Titulo</h3>
+                    <p class="book-author">@libro.Autor</p>
+                    <div class="book-meta">
+                        <span>@libro.Categoria</span>
+                    </div>
+                    <div class="book-actions">
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@libro.Id" class="btn btn-primary action-btn">Ver Más</a>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            // Obtenemos la lista de Ids de favoritos desde el ViewBag
+                            var librosFavoritos = ViewBag.LibrosFavoritos as List<int> ?? new List<int>();
+
+                            @if (librosFavoritos.Contains(libro.Id))
+                            {
+                                // SI el Id de este libro ESTÁ en la lista, mostramos el botón de Quitar
+                                <form asp-controller="Favorites" asp-action="Remove" method="post" style="display: inline;">
+                                    <input type="hidden" name="libroId" value="@libro.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm action-btn">🌟 Quitar</button>
+                                </form>
+                            }
+                            else
+                            {
+                                // SI NO está en la lista, mostramos el botón de Agregar
+                                <form asp-controller="Favorites" asp-action="Add" method="post" style="display: inline;">
+                                    <input type="hidden" name="libroId" value="@libro.Id" />
+                                    <button type="submit" class="btn btn-warning btn-sm action-btn">⭐ Agregar</button>
+                                </form>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No hay libros disponibles en este momento.</p>
+    }
+</div>

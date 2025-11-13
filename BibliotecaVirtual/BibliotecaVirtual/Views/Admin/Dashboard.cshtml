@@ -1,0 +1,70 @@
+﻿@model BibliotecaVirtual.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Panel de Administración";
+}
+
+<h2>Panel de Administración</h2>
+<hr />
+
+<h4>Libros Existentes</h4>
+<a asp-action="AddBookPage" class="btn btn-success" style="margin-bottom: 20px;">+ Agregar Nuevo Libro</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var libro in Model.Libros)
+        {
+            <tr>
+                <td>@libro.Titulo</td>
+                <td>@libro.Autor</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@libro.Id" class="btn btn-primary btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@libro.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr style="margin: 40px 0;" />
+
+@if (User.IsInRole("Admin"))
+{
+<h4>Usuarios Registrados</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model.Usuarios)
+        {
+            <tr>
+                <td>@usuario.Nombre</td>
+                <td>@usuario.Correo</td>
+                <td>@usuario.Rol</td>
+                <td>
+                    <a asp-action="EditUser" asp-route-id="@usuario.Id" class="btn btn-primary btn-sm">Editar</a>
+                    <form asp-action="DeleteUser" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este usuario?');">
+                            <input type="hidden" name="id" value="@usuario.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+<hr />
+<h4>Test Error Pages</h4>
+<p>Click the button below to test the custom 500 Internal Server Error page.</p>
+<a asp-action="TriggerError" asp-controller="Admin" class="btn btn-danger">Simulate 500 Error</a>

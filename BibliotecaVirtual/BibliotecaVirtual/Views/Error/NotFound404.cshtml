@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Página no encontrada";
+}
+
+<div class="hero" style="background: linear-gradient(135deg, var(--warning-color), var(--accent-color)); text-align: center; padding: 4rem 2rem;">
+    <h1 style="font-size: 6rem; margin-bottom: 0;">404</h1>
+    <h2 style="font-size: 2rem;">Página No Encontrada</h2>
+    <p>@ViewBag.ErrorMessage</p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-light" style="color: black; margin-top: 1rem;">Volver al Inicio</a>
+</div>

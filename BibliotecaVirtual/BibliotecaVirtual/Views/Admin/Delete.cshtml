@@ -1,0 +1,18 @@
+﻿@model BibliotecaVirtual.Models.Libro
+@{
+    ViewData["Title"] = "Confirmar Borrado";
+}
+
+<h3>¿Estás seguro de que quieres eliminar este libro?</h3>
+<hr />
+<div>
+    <h4>@Model.Titulo</h4>
+    <p><strong>Autor:</strong> @Model.Autor</p>
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <input type="submit" value="Sí, Eliminar" class="btn btn-danger" />
+        <a asp-action="Dashboard" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

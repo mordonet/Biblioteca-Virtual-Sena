@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Error del Servidor";
+}
+
+<div class="hero" style="background: linear-gradient(135deg, #6c757d, var(--accent-color)); text-align: center; padding: 4rem 2rem;">
+    <h1 style="font-size: 6rem; margin-bottom: 0;">500</h1>
+    <h2 style="font-size: 2rem;">Error Interno del Servidor</h2>
+    <p>@ViewBag.ErrorMessage</p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-light" style="color: black; margin-top: 1rem;">Volver al Inicio</a>
+</div>
