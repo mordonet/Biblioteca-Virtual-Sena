@@ -1,0 +1,8 @@
+{
+  "name": "proyecto-nosql",
+  "version": "1.0.0",
+  "description": "Proyecto sin backend (estructura simulada)",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
