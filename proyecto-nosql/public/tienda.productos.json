@@ -1,0 +1,63 @@
+[{
+  "_id": {
+    "$oid": "6913cbb9f72a256b2e443631"
+  },
+  "nombre": "Mouse",
+  "categoria": "Accesorios",
+  "precio": 50,
+  "stock": 25
+},
+{
+  "_id": {
+    "$oid": "6913cbb9f72a256b2e443632"
+  },
+  "nombre": "Teclado",
+  "categoria": "Accesorios",
+  "precio": 100,
+  "stock": 15
+},
+{
+  "_id": {
+    "$oid": "6913cbb9f72a256b2e443633"
+  },
+  "nombre": "Monitor",
+  "categoria": "Electrónica",
+  "precio": 700,
+  "stock": 8
+},
+{
+  "_id": {
+    "$oid": "6913cbb9f72a256b2e443634"
+  },
+  "nombre": "Laptop",
+  "categoria": "Computación",
+  "precio": 2500,
+  "stock": 5
+},
+{
+  "_id": {
+    "$oid": "6913cbb9f72a256b2e443635"
+  },
+  "nombre": "Tablet",
+  "categoria": "Computación",
+  "precio": 1200,
+  "stock": 12
+},
+{
+  "_id": {
+    "$oid": "6913cbb9f72a256b2e443636"
+  },
+  "nombre": "Audífonos",
+  "categoria": "Accesorios",
+  "precio": 200,
+  "stock": 20
+},
+{
+  "_id": {
+    "$oid": "6913cbb9f72a256b2e443637"
+  },
+  "nombre": "Televisor",
+  "categoria": "Electrónica",
+  "precio": 1800,
+  "stock": 7
+}]
