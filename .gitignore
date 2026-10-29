@@ -1,0 +1,13 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+
+# Node
+node_modules/
+.env
+
+# Notas locales para Claude (no se publican)
+CLAUDE.md
